@@ -1,34 +1,34 @@
-import React, { useRef,  useLayoutEffect } from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
 import styled from 'styled-components';
-import {useImmer} from 'use-immer';
+import { useImmer } from 'use-immer';
 import cx from 'classnames';
-import {color,font, device } from 'styles/_utils';
-import {getElementSize} from 'lib/library';
+import { color, font, device } from 'styles/_utils';
+import { getElementSize, compareProp } from 'lib/library';
 
-function DashboardTemplate({  nav, header, children,title,rightSpace, styleConf }) {
-  const navRef      = useRef();
-  const headerRef   = useRef();
+const DashboardTemplateState= {
+  header     : { x: null, y: null },
+  nav        : { x: null, y: null },
+  children   : { x: null, y: null },
+  rightSpace : { x: null, y: null }
+}
+const DashboardTemplate = React.memo(function DashboardTemplate({ nav, header, children, title, rightSpace, styleConf }) {
+  const navRef = useRef();
+  const headerRef = useRef();
   const childrenRef = useRef();
   const rightSpaceRef = useRef();
-  const [values, setValues] = useImmer({
-    header     : { x: null, y: null },
-    nav        : { x: null, y: null },
-    children   : { x: null, y: null },
-    rightSpace : { x: null, y: null } 
-  });
- 
-  useLayoutEffect(()=>{
-    if(childrenRef.current || header.current){
-      setValues(draft=>{
-        draft.header   = getElementSize(headerRef.current);
-        draft.nav      = getElementSize(navRef.current);
-        draft.children = getElementSize(childrenRef.current);
+  const [values, setValues] = useImmer(DashboardTemplateState);
+
+  useLayoutEffect(() => {
+    if (childrenRef.current || header.current) {
+      setValues(draft => {
+        
+        draft.header     = getElementSize(headerRef.current);
+        draft.nav        = getElementSize(navRef.current);
+        draft.children   = getElementSize(childrenRef.current);
         draft.rightSpace = getElementSize(rightSpaceRef.current);
       })
     }
-  },[setValues]);
-
-  console.log(values,'cSize');
+  }, [setValues]);
 
   return (
     <Styled.DashboardTemplate  {...values} bg={color.gray_dashboard} styleConf={styleConf}>
@@ -37,26 +37,31 @@ function DashboardTemplate({  nav, header, children,title,rightSpace, styleConf 
       {nav &&
         <div className={cx('DashboardTemplate__nav')} children={nav} ref={navRef} />}
 
-      {children && 
+      {children &&
         <div className={cx('DashboardTemplate__main')} ref={childrenRef}>
-            {title && <div className="DashboardTemplate__title">{title}</div>}
-            
-            {children && 
-              <div bg={"white"} className={cx("DashboardTemplate__children")}>{children}
-              
-              </div>}
+          {title && <div className="DashboardTemplate__title">{title}</div>}
+
+          {children &&
+            <div bg={"white"} className={cx("DashboardTemplate__children")}>{children}
+
+            </div>}
         </div>
       }
-      {rightSpace && 
-          <div className={cx("DashboardTemplate__rightSpace")} children={rightSpace} ref={rightSpaceRef} />}
-      
+      {rightSpace &&
+        <div className={cx("DashboardTemplate__rightSpace")} children={rightSpace} ref={rightSpaceRef} />}
+
     </Styled.DashboardTemplate>
   );
-}
+}, (prevProp, nextProp) => {
+  return compareProp(prevProp, nextProp, ["nav", "header", "children","title","rightSpace", "styleConf" ])
+})
+
+
+
 
 const Styled = {
   DashboardTemplate: styled.div`
-  ${({bg})=> bg && `background:${bg}`};
+  ${({ bg }) => bg && `background:${bg}`};
   min-height:100vh;
   &:after{
     display:block;
@@ -75,23 +80,24 @@ const Styled = {
       z-index:500;
       position:fixed;
       left:0;
-      top:${({header})=>header.y ? header.y:0 }px;
-      min-height:${({header})=>header.y ?`calc(100% - ${header.y}px)`:'100%' };
+      top:${({ header }) => header.y ? header.y : 0}px;
+      height:${({ header }) => header.y ? `calc(100% - ${header.y}px)` : '100%'};
     }
     .DashboardTemplate__main{
-      ${({header})=>header.y && `margin-top:${header.y}px; height:calc(100% - ${header.y}px)`}
-      ${({nav,rightSpace})=>nav.x && `
-        margin-left:${nav.x}px; 
-        width:calc(100% - ${(rightSpace.x?rightSpace.x:0) + nav.x +2 - 30}px)`};
-      ${({rightSpace})=> `padding:${rightSpace.x?'30px 0 30px 30px':'30px'}`}
+      ${({ header }) => header.y && `margin-top:${header.y}px; height:calc(100% - ${header.y}px)`};
+      ${({ nav, rightSpace }) => nav.x && `margin-left:${nav.x}px; width:calc(100% - ${(rightSpace.x ? rightSpace.x : 0) + nav.x + 2 - 0}px)`};
+      ${({ rightSpace }) => {
+      const paddingSize = 15;
+      return `padding:${rightSpace.x ? `${paddingSize}px 0 ${paddingSize}px ${paddingSize}px` : `${paddingSize}px`}`
+    }};
       &:after{
         display:block;
         content:"";
         clear: both;
       }
-      min-height:100vh;
+      /* min-height:100vh; */
       float:left;
-      max-width:${device.pc};
+      /* max-width:${device.pc}; */
     }
     .DashboardTemplate__title{
       position:relative;
@@ -99,7 +105,7 @@ const Styled = {
       margin-bottom:20px;
       padding:10px 20px;
       font-weight:600;
-      ${font(18,color.black_font)};
+      ${font(18, color.black_font)};
       &:after{
         position:absolute;
         display:block;
@@ -113,7 +119,6 @@ const Styled = {
     }
     .DashboardTemplate__rightSpace{
       /* display:inline-block; */
-
       float:left;
     }
     .DashboardTemplate__children{
@@ -130,7 +135,7 @@ const Styled = {
     }
     .DashboardTemplate__move_btn{
       float: right;
-      ${font(16,color.black_font)};
+      ${font(16, color.black_font)};
       cursor: pointer;
       
     }

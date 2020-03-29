@@ -3,17 +3,16 @@ import {DashboardTemplate} from 'components/base/template';
 import {DashboardNavContainer} from 'containers/nav';
 import {PlainHeaderContainer} from 'containers/header';
 
-
-function Home(props) {
+function Manage(props) {
   return (
     <DashboardTemplate
       header={<PlainHeaderContainer />}
       nav={<DashboardNavContainer />}
-      title="Dashboard"
+      title="Manage"
     >
-      Dashboard
+      Manage
     </DashboardTemplate>
   );
 }
 
-export default Home;
+export default Manage;

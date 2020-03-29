@@ -5,15 +5,20 @@ import {FullScreenLoading} from 'components/base/loading';
 
 // <PrivateRoute path="/project" component={Project} to="/auth/signup"/>
 function PrivateRoute({component:Component,...rest}) {
-  const {auth,base} = useSelector(({auth,base})=>({auth,base}),shallowEqual );
-  const {signIn} = auth;
-  const {landing} = base;
+  const {isAutheticated,landing} = useSelector(({auth,base})=>
+  ({
+    isAutheticated:auth.signIn.isAutheticated,
+    landing:base.landing
+  }),
+  shallowEqual );
+  // const {signIn} = auth;
+  // const {landing} = base;
   const isRedirect = rest.redirect;
   return (
     <Route {...rest} render={props=>{
       if(landing){
         return <FullScreenLoading visible={true}/>
-      }else if(!signIn.isAutheticated){
+      }else if(!isAutheticated){
         return <Redirect to={rest.to? rest.to : '/auth/login'}/>
       }else if(rest.redirect){
         return <Redirect to={isRedirect}/>

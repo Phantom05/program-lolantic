@@ -3,17 +3,17 @@ import {DashboardTemplate} from 'components/base/template';
 import {DashboardNavContainer} from 'containers/nav';
 import {PlainHeaderContainer} from 'containers/header';
 
-
-function Home(props) {
+function Mypage(props) {
   return (
     <DashboardTemplate
       header={<PlainHeaderContainer />}
       nav={<DashboardNavContainer />}
-      title="Dashboard"
+      title="Mypage"
     >
-      Dashboard
+      Mypage
     </DashboardTemplate>
   );
 }
 
-export default Home;
+
+export default Mypage;

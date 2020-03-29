@@ -1,14 +1,17 @@
 import React from 'react';
 import {Route,Redirect} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {useSelector,shallowEqual} from 'react-redux';
 import {FullScreenLoading} from 'components/base/loading';
 
 // <LRoute path="/auth" component={Auth} token/>
 // token이 있을때 보이면 안되는 페이지
 function LRoute({component:Component,...rest}) {
-  const {base,auth} = useSelector(state=>state);
-  const {landing} = base;
-  const {isAutheticated} = auth.signIn;
+  const {isAutheticated,landing} = useSelector(({auth,base})=>
+  ({
+    isAutheticated:auth.signIn.isAutheticated,
+    landing:base.landing
+  }),
+  shallowEqual );
 
   return (
     <Route {...rest} render={props=>{

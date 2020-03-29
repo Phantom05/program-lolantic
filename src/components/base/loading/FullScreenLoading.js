@@ -1,16 +1,18 @@
 import React from 'react';
-import styled,{ createGlobalStyle  } from 'styled-components';
+import styled,{ 
+  // createGlobalStyle  
+} from 'styled-components';
 import {CustomLoadingCircle} from 'components/base/loading';
 
 
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    /* overflow-y:hidden; */
-    /* padding-right:18px !important;  */
+// const GlobalStyle = createGlobalStyle`
+//   body {
+//     /* overflow-y:hidden; */
+//     /* padding-right:18px !important;  */
     
-  }
-`
+//   }
+// `
 
 /**
  * <FullScreenLoading 
@@ -23,10 +25,9 @@ function FullScreenLoading(props) {
   if(props.visible === false)  return null;
   return (
     <Styled.FullScreenLoading 
-      style={props.style} styleConf={props.styleConf}
-      {...props}
+      style={props.style} styleConf={props.styleConf} {...props}
     >
-      <GlobalStyle/>
+      {/* <GlobalStyle/> */}
       <span className="loading__center">
         <CustomLoadingCircle size={props.size?props.size:30}/>
       </span>
