@@ -88,6 +88,7 @@ export const buttonPink = css`
   border: 0;
   box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
   cursor: pointer;
+  text-align:center;
   ${font(15,color.white)};
   &:hover{
     /* background:${color.blue_hover}; */

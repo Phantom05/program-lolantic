@@ -374,8 +374,8 @@ export function getExtensionOfFilename(filename) {
  */
 export function disableF5(e) { 
   const keycode = e.keyCode;
-  if( (e.ctrlKey == true && (keycode == 78 || keycode == 82)) 
-  || (e.which || keycode) == 116) {
+  if( (e.ctrlKey === true && (keycode === 78 || keycode === 82)) 
+  || (e.which || keycode) === 116) {
     e.preventDefault();
   }
 };

@@ -5,7 +5,7 @@ import produce from 'immer';
 
 
 let initialState={
-  landing:false,
+  landing:true,
   error:{
     loading:false,
     message:null
