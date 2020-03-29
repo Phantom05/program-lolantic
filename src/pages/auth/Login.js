@@ -2,12 +2,13 @@
 
 import React from 'react';
 import { PlainAuthTemplate } from 'components/base/template';
-import {LoginForm} from 'components/common/form';
+import { LoginContainer } from 'containers/auth';
+// import {LoginForm} from 'components/common/form';
 
 function Login(props) {
   return (
     <PlainAuthTemplate >
-      <LoginForm />
+      <LoginContainer />
     </PlainAuthTemplate>
   );
 }

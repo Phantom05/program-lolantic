@@ -37,6 +37,7 @@ const _color ={
   blue_week          : `#9DC7E0`,
   blue_font          : `#47A7DF`,
   blue_line_bg       : `#F0F7FB`,
+  link_blue          : `#8bb2ec`,
   ribbon             : `#2458A5`,
   ribbon_deep        : `#004065`,
   btn_color          : '#98B8CB',

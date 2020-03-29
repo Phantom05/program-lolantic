@@ -1,9 +1,7 @@
 import React from 'react';
 import {Route,Redirect} from 'react-router-dom';
 import {useSelector, shallowEqual } from 'react-redux';
-// import {FullScreenLoading} from 'components/base/loading';
-
-
+import {FullScreenLoading} from 'components/base/loading';
 
 // <PrivateRoute path="/project" component={Project} to="/auth/signup"/>
 function PrivateRoute({component:Component,...rest}) {
@@ -14,8 +12,7 @@ function PrivateRoute({component:Component,...rest}) {
   return (
     <Route {...rest} render={props=>{
       if(landing){
-        return 'Loading...'
-        // <FullScreenLoading visible={true}/>
+        return <FullScreenLoading visible={true}/>
       }else if(!signIn.isAutheticated){
         return <Redirect to={rest.to? rest.to : '/auth/login'}/>
       }else if(rest.redirect){

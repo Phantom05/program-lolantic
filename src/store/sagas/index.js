@@ -1,6 +1,6 @@
 import {all,fork} from 'redux-saga/effects';
 import baseSaga from './baseSaga';
-// import authSaga from './authSaga';
+import authSaga from './authSaga';
 // import infoSaga from './infoSaga';
 // import listingSaga from './listingSaga';
 // import commonSaga from './commonSaga';
@@ -9,7 +9,7 @@ import baseSaga from './baseSaga';
 export default function* rootSaga(){
   yield all([
     fork(baseSaga),
-    // fork(authSaga),
+    fork(authSaga),
     // fork(infoSaga),
     // fork(listingSaga),
     // fork(commonSaga),
