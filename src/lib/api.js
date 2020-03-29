@@ -91,12 +91,16 @@ export function postSignin(payload){
 }
 
 export function postToken(payload){
-  const getStorageToekn = storage.get('email');
+  const getStorageToekn = storage.get('token');
+  const getStorageEmail = storage.get('email');
+  const getStoragePassword = storage.get('password');
   const axiosConf={
     url:endPoint.post_token,
     method:'post',
     data:{ 
-      token:getStorageToekn
+      token:getStorageToekn,
+      email:getStorageEmail,
+      password:getStoragePassword
     }
   }
   return Acx(axiosConf);

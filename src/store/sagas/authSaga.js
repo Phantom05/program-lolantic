@@ -20,6 +20,8 @@ const handleSignIn= createPromiseSaga({
   tag:'handleSignIn',
   success:({payload})=>{
     storage.set('token',payload.email);
+    storage.set('email',payload.email);
+    storage.set('password',payload.password);
   }
 });
 

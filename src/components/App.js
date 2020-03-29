@@ -33,13 +33,13 @@ function App() {
       <Core />
       <Switch>
         <PrivateRoute exact path="/" component={Home} />
-        <PrivateRoute exact path="/analysis" component={Analysis} />
-        <PrivateRoute exact path="/manage" component={Manage} />
-        <PrivateRoute exact path="/report" component={Report} />
-        <PrivateRoute exact path="/mypage" component={Mypage} />
-        <LRoute exact path="/auth/login" component={Login} token />
-        <LRoute exact path="/auth/reset/password" component={ResetPassword} token/>
-        <Route exact path="/auth/logout" component={Logout} />
+        <PrivateRoute  path="/analysis" component={Analysis} />
+        <PrivateRoute  path="/manage" component={Manage} />
+        <PrivateRoute  path="/report" component={Report} />
+        <PrivateRoute  path="/mypage" component={Mypage} />
+        <LRoute  path="/auth/login" component={Login} token />
+        <LRoute  path="/auth/reset/password" component={ResetPassword} token/>
+        <Route  path="/auth/logout" component={Logout} />
         <Route component={NotFound} />
       </Switch>
      
