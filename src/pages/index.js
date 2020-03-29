@@ -7,5 +7,12 @@
 export {default as Home} from './home/Home';
 export {default as Login} from './auth/Login'
 export {default as ResetPassword} from './auth/ResetPassword';
+export {default as Analysis} from './analysis/Analysis';
+export {default as Manage} from './manage/Manage';
+export {default as Mypage} from './mypage/Mypage';
+export {default as Report} from './report/Report';
 export {default as NotFound} from './error/NotFound'
+
+
+
 
