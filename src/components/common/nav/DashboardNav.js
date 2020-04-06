@@ -66,7 +66,7 @@ function DashboardNav(props) {
   const { listing: listReducer } = useSelector(state => state);
   const [navList] = useImmer(menuList);
   // const [deClick,setDeClick] = useImmer(true);
-  const { profile, info, auth } = props;
+  // const { profile, info, auth } = props;
   // const isCustomerGrade = auth.signIn.profile.grade === 3;
   // const userCode =auth.signIn.profile.userCode;
 
